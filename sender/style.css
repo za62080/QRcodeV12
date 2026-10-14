@@ -132,3 +132,8 @@ code{font-size:.9em}
    max-height:104px!important;flex-basis:104px!important;font-size:13px!important;
  }
 }
+
+/* v12: the camera viewport may be rectangular, but the scan target is always square. */
+.camera-layout .reader{aspect-ratio:auto!important;height:260px!important;max-height:260px!important;min-height:260px!important;width:auto!important;flex:1 1 0!important;overflow:hidden!important}
+.camera-layout .reader video,#reader video{height:100%!important;max-height:none!important;width:100%!important;object-fit:contain!important;transform:none!important}
+@media(max-width:420px){.camera-layout .reader{height:240px!important;max-height:240px!important;min-height:240px!important}}

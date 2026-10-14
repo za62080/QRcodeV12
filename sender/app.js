@@ -20,7 +20,7 @@ function loadSettings(){try{const s=JSON.parse(localStorage.getItem(SETTINGS_KEY
 function saveSettings(){localStorage.setItem(SETTINGS_KEY,JSON.stringify({continuousRegistration:ui.continuousRegistration.checked,allowDuplicates:ui.allowDuplicates.checked,autoClear:ui.autoClear.checked}));}
 function updateCameraButton(){ui.camera.textContent=scanning?'カメラ停止':'カメラ起動';ui.camera.classList.toggle('camera-on',scanning);ui.camera.classList.toggle('camera-off',!scanning);}
 async function startCamera(){if(scanning)return;if(typeof Html5Qrcode==='undefined'){message('QRライブラリを読み込めませんでした。');return;}
- try{scanner=scanner||new Html5Qrcode('reader');await scanner.start({facingMode:'environment'},{fps:10,qrbox:(w,h)=>{const z=Math.floor(Math.min(w,h)*.7);return{width:z,height:z};}},onScan,()=>{});scanning=true;updateCameraButton();}
+ try{scanner=scanner||new Html5Qrcode('reader');await scanner.start({facingMode:'environment'},{fps:10,qrbox:(w,h)=>{const z=Math.floor(Math.min(w,h)*.98);return{width:z,height:z};}},onScan,()=>{});scanning=true;updateCameraButton();}
  catch(e){message('カメラを起動できません。権限・HTTPSを確認してください。');}}
 async function stopCamera(){cancelPending();if(scanner&&scanning){await scanner.stop().catch(()=>{});scanning=false;}updateCameraButton();}
 function cancelPending(){if(pendingTimer)clearTimeout(pendingTimer);pendingTimer=null;pending=null;ui.accept.disabled=true;ui.releaseFreeze.disabled=true;ui.latest.value='';}
@@ -106,7 +106,7 @@ const r=$('receiverUrl');if(r)r.textContent=receiverUrl();loadSettings();readPro
   const caps=t?.getCapabilities?.()||{};
   const hasZoom=!!(caps.zoom&&Number.isFinite(caps.zoom.min)&&Number.isFinite(caps.zoom.max));
   zoom.disabled=!hasZoom;
-  if(hasZoom){zoom.min=caps.zoom.min;zoom.max=caps.zoom.max;zoom.step=caps.zoom.step||0.1;zoom.value=t.getSettings?.().zoom||caps.zoom.min;zoomText.textContent=Number(zoom.value).toFixed(1)+'×';}
+  if(hasZoom){zoom.min=caps.zoom.min;zoom.max=Math.min(3,caps.zoom.max);zoom.step=caps.zoom.step||0.1;zoom.value=t.getSettings?.().zoom||caps.zoom.min;zoomText.textContent=Number(zoom.value).toFixed(1)+'×';}
   else zoomText.textContent=t?'ズーム非対応':'1.0×';
   torch.disabled=!caps.torch;
   status.textContent=t&&!caps.torch?'ライト非対応':'';

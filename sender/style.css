@@ -86,3 +86,21 @@ code{font-size:.9em}
 .camera-side-actions button,#releaseFreezeBtn,#acceptBtn{height:76px!important;min-height:76px!important;max-height:76px!important}
 @media(max-width:420px){.camera-layout .reader,.camera-layout .reader video{height:206px!important;max-height:206px!important}.camera-side-actions button,#releaseFreezeBtn,#acceptBtn{height:70px!important;min-height:70px!important;max-height:70px!important}}
 .camera-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0;font-size:13px}.camera-controls label{display:flex;align-items:center;gap:5px}.camera-controls input[type=range]{width:120px}.camera-controls button{padding:6px 10px}.password-options{margin:8px 0}.password-options input[type=number]{max-width:110px}.password-options .checkbox-label{display:flex;align-items:center;gap:6px}
+
+/* v12 camera 1.5x: preserve the existing camera viewport dimensions;
+   enlarge only the live video within the clipped viewport. */
+.camera-layout .reader{overflow:hidden!important}
+.camera-layout .reader video{transform:scale(1.5)!important;transform-origin:center center!important;object-fit:cover!important}
+/* Enlarge the vertical action buttons and add a clear separation. */
+.camera-side-actions{gap:14px!important}
+.camera-side-actions button,#releaseFreezeBtn,#acceptBtn{
+ height:114px!important;min-height:114px!important;max-height:114px!important;
+ flex:0 0 114px!important;
+}
+@media(max-width:420px){
+ .camera-side-actions{gap:12px!important}
+ .camera-side-actions button,#releaseFreezeBtn,#acceptBtn{
+  height:105px!important;min-height:105px!important;max-height:105px!important;
+  flex:0 0 105px!important;
+ }
+}

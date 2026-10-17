@@ -124,3 +124,7 @@ const r=$('receiverUrl');if(r)r.textContent=receiverUrl();loadSettings();readPro
 })();
 
 window.qrMakeEncryptedFile=makeEncryptedFile;
+
+window.qrOneDriveExport={getCount:()=>historyItems.length,getCsv:()=>csvContent()};
+
+window.qrExcelExport={getRows:()=>historyItems.map(x=>({id:x.id,value:x.value,time:formatDate(x.time)}))};

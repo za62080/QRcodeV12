@@ -65,6 +65,30 @@
 
   
 
-<section class="panel"><h2>③ サーバーへ暗号化データを送信</h2><p>送信側アカウントでログインしてください。パスワードはサーバーへ送りません。</p><label>ログイン用メールアドレス<input id="cloudEmail" type="email" autocomplete="username"></label><label>ログイン用パスワード<input id="cloudPassword" type="password" autocomplete="current-password"></label><div class="actions"><button id="cloudLogin" type="button">ログイン</button><button id="cloudLogout" type="button">ログアウト</button><button id="cloudUpload" type="button" class="primary">暗号化してサーバー送信</button></div><p id="cloudStatus" role="status" aria-live="polite"></p></section><script type="module" src="cloud-sender.js"></script><div class="exit-area"><button id="exitAppBtn" type="button" class="danger">アプリ終了</button></div></main>
+<section class="panel"><h2>③ サーバーへ暗号化データを送信</h2><p>送信側アカウントでログインしてください。パスワードはサーバーへ送りません。</p><label>ログイン用メールアドレス<input id="cloudEmail" type="email" autocomplete="username"></label><label>ログイン用パスワード<input id="cloudPassword" type="password" autocomplete="current-password"></label><div class="actions"><button id="cloudLogin" type="button">ログイン</button><button id="cloudLogout" type="button">ログアウト</button><button id="cloudUpload" type="button" class="primary">暗号化してサーバー送信</button></div><p id="cloudStatus" role="status" aria-live="polite"></p></section><script type="module" src="cloud-sender.js"></script>
+<section class="panel" id="onedrivePanel">
+<h2>④ OneDriveへ送信（CSV／暗号化）</h2>
+<p class="hint">各スマホで別のMicrosoftアカウントを使用できます。共有フォルダーの編集権限と、Microsoftアプリ登録が必要です。</p>
+<label>アプリ登録のクライアントID<input id="odClientId" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" autocomplete="off"></label>
+<label>受信先フォルダーの共有URL<input id="odShareUrl" type="url" placeholder="https://1drv.ms/f/..." autocomplete="off"></label>
+<label>端末識別名<input id="odDevice" placeholder="例：ARROWS-We2" maxlength="32"></label>
+<div class="actions"><button id="odLogin" type="button">Microsoftログイン</button><button id="odLogout" type="button">ログアウト</button></div>
+<div class="actions"><button id="odCsv" type="button">CSVをOneDriveへ送信</button><button id="odEnc" type="button">暗号化してOneDriveへ送信</button></div>
+<p class="hint">暗号化送信には上の暗号化パスワードと確認欄を入力してください。送信成功後も履歴は自動削除しません。</p>
+<p id="odStatus" role="status" aria-live="polite"></p>
+</section>
+<script src="https://alcdn.msauth.net/browser/2.38.3/js/msal-browser.min.js" defer></script>
+<script src="onedrive.js" defer></script>
+
+<section class="panel" id="excelLinkPanel">
+<h2>⑤ 共有Excelへ転記（コピー・貼り付け）</h2>
+<p class="hint">OneDriveへのログインやAPI登録は不要です。履歴をコピーして、編集可能な共有Excelのセルへ貼り付けます。</p>
+<label>共有Excelのリンク<input id="excelShareUrl" type="url" inputmode="url" placeholder="https://...sharepoint.com/... または https://1drv.ms/..." autocomplete="off"></label>
+<div class="actions"><button id="excelCopyBtn" type="button" disabled>Excel用データをコピー</button><button id="excelOpenBtn" type="button">共有Excelを開く</button></div>
+<p id="excelCopyStatus" class="hint" role="status" aria-live="polite"></p>
+<p class="hint">コピー形式：識別番号／QRコードデータ／読取日時（タブ区切り・見出しなし）。Excelの空白行の先頭セルに貼り付けてください。コピーだけでは送信・保存されません。</p>
+</section>
+<script src="excel-link.js" defer></script>
+<div class="exit-area"><button id="exitAppBtn" type="button" class="danger">アプリ終了</button></div></main>
 </body>
 </html>
